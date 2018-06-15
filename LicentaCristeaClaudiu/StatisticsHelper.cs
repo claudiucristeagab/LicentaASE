@@ -268,7 +268,7 @@ namespace LicentaCristeaClaudiu
                             {
                                 listX.Add(d);
                             }
-                            else if (j == columns[1])
+                            else if (selectedColumn == columns[1])
                             {
                                 listY.Add(d);
                             }  
@@ -289,27 +289,27 @@ namespace LicentaCristeaClaudiu
                 
                 Console.WriteLine("y = {0} + {1} * x", a, b);
 
-                DataTable descriptiveStatisticsDataTable = new DataTable("Descriptive Statistics");
+                DataTable linearRegressionDataTable = new DataTable("Linear regression");
 
                 DataColumn nameDataColumn = new DataColumn("Name");
                 DataColumn sizeDataColumn = new DataColumn("Size");
                 DataColumn interceptDataColumn = new DataColumn("Intercept");
                 DataColumn slopeDataColumn = new DataColumn("Slope");
 
-                descriptiveStatisticsDataTable.Columns.Add(nameDataColumn);
-                descriptiveStatisticsDataTable.Columns.Add(sizeDataColumn);
-                descriptiveStatisticsDataTable.Columns.Add(interceptDataColumn);
-                descriptiveStatisticsDataTable.Columns.Add(slopeDataColumn);
+                linearRegressionDataTable.Columns.Add(nameDataColumn);
+                linearRegressionDataTable.Columns.Add(sizeDataColumn);
+                linearRegressionDataTable.Columns.Add(interceptDataColumn);
+                linearRegressionDataTable.Columns.Add(slopeDataColumn);
 
-                DataRow dataRow = descriptiveStatisticsDataTable.NewRow();
+                DataRow dataRow = linearRegressionDataTable.NewRow();
                 dataRow["Name"] = dataGridView.Columns[columns[0]].Name.ToString() + " " + dataGridView.Columns[columns[1]].Name.ToString();
                 dataRow["Size"] = xdata.Length;
                 dataRow["Intercept"] = a;
                 dataRow["Slope"] = b;
-                descriptiveStatisticsDataTable.Rows.Add(dataRow);
+                linearRegressionDataTable.Rows.Add(dataRow);
 
                 dataGridViewStatistics.DataSource = null;
-                dataGridViewStatistics.DataSource = descriptiveStatisticsDataTable;
+                dataGridViewStatistics.DataSource = linearRegressionDataTable;
             }
             else
             {
@@ -317,7 +317,7 @@ namespace LicentaCristeaClaudiu
             }
         }
 
-        public void LinearRegressionSimpleOneColumn(DataGridView dataGridViewStatistics, int selectedColumn)
+        public void LinearRegressionSimpleOneColumn(DataGridView dataGridViewStatistics, int selectedColumn, int nrOfPredictions)
         {
             NumberStringChecker nsc = new NumberStringChecker();
             List<double> listX = new List<double>();
@@ -337,7 +337,7 @@ namespace LicentaCristeaClaudiu
             double[] xdata = new double[dataGridView.Rows.Count];
             for (int i =0;i< xdata.Length; i++)
             {
-                xdata[i] = i + 1;
+                xdata[i] = i;
             }
             listX.Clear();
             double[] ydata = listY.ToArray();
@@ -371,10 +371,88 @@ namespace LicentaCristeaClaudiu
 
                 dataGridViewStatistics.DataSource = null;
                 dataGridViewStatistics.DataSource = descriptiveStatisticsDataTable;
+
+
+
+                for(int i=xdata.Length + 1; i < xdata.Length + nrOfPredictions + 1; i++)
+                {
+                    Console.WriteLine("{3} = {0} + {1} * {2}", a, b, i, a + b * i);
+                }
             }
             else
             {
                 MessageBox.Show("Simple regression failed.");
+            }
+        }
+
+        public void Extrapolation(DataGridView dataGridViewStatistics, int selectedColumn, int nrOfPredictions)
+        {
+            NumberStringChecker nsc = new NumberStringChecker();
+            List<double> listX = new List<double>();
+            List<double> listY = new List<double>();
+            if (!nsc.IsString(dataGridView.Rows[0].Cells[selectedColumn].Value.ToString()))
+            {
+                for (int i = 0; i < dataGridView.Rows.Count; i++)
+                {
+                    String s = dataGridView.Rows[i].Cells[selectedColumn].Value.ToString();
+                    Double d = 0;
+                    if (Double.TryParse(s, out d))
+                    {
+                        listY.Add(d);
+                    }
+                }
+            }
+            double[] xdata = new double[dataGridView.Rows.Count];
+            for (int i = 0; i < xdata.Length; i++)
+            {
+                xdata[i] = i+1;
+            }
+            listX.Clear();
+            double[] ydata = listY.ToArray();
+            listY.Clear();
+            if (xdata.Length == ydata.Length)
+            {
+                Tuple<double, double> t = MathNet.Numerics.LinearRegression.SimpleRegression.Fit(xdata, ydata);
+                double a = t.Item1;
+                double b = t.Item2;
+
+                Console.WriteLine("y = {0} + {1} * x", a, b);
+
+                DataTable extrapolationDataTable = new DataTable("Extrapolation");
+
+                DataColumn numberDataColumn = new DataColumn("Number");
+                DataColumn valueDataColumn = new DataColumn("Value");
+                DataColumn extrapolatedDataColumn = new DataColumn("Extrapolated");
+
+                extrapolationDataTable.Columns.Add(numberDataColumn);
+                extrapolationDataTable.Columns.Add(valueDataColumn);
+                extrapolationDataTable.Columns.Add(extrapolatedDataColumn);
+
+                for (int i = 0; i < xdata.Length + nrOfPredictions; i++)
+                {
+                    if (i < xdata.Length)
+                    {
+                        DataRow dataRow = extrapolationDataTable.NewRow();
+                        dataRow["Number"] = xdata[i];
+                        dataRow["Value"] = ydata[i];
+                        extrapolationDataTable.Rows.Add(dataRow);
+                    }
+                    else
+                    {
+                        DataRow dataRow = extrapolationDataTable.NewRow();
+                        dataRow["Number"] = i + 1;
+                        dataRow["Value"] = a + b * (i + 1);
+                        dataRow["Extrapolated"] = "Yes";
+                        extrapolationDataTable.Rows.Add(dataRow);
+                    }
+                    
+                }
+                dataGridViewStatistics.DataSource = null;
+                dataGridViewStatistics.DataSource = extrapolationDataTable;
+            }
+            else
+            {
+                MessageBox.Show("Extrapolation failed.");
             }
         }
 

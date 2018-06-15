@@ -25,12 +25,9 @@ namespace LicentaCristeaClaudiu
 
             chartSQL.Series[0] = new Series();
             chartSQL.Series[0].Name = "Test";
-            //chartSQL.Series[0].ChartType = SeriesChartType.Area;
             chartSQL.DataSource = dgv.DataSource;
-            //chartSQL.Series[0].XValueMember = dgv.Columns[0].DataPropertyName;
             chartSQL.Series[0].YValueMembers = dgv.Columns[1].DataPropertyName;
             chartSQL.DataBind();   
-            //chartSQL.Series[0].ChartType=SeriesChartType.
         }
 
         private void PopulateComboBox(ComboBox cb)
@@ -87,6 +84,12 @@ namespace LicentaCristeaClaudiu
         private void columnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             chartSQL.Series[0].ChartType = SeriesChartType.Column;
+            chartSQL.Series[0].IsValueShownAsLabel = false;
+        }
+
+        private void lineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            chartSQL.Series[0].ChartType = SeriesChartType.Line;
             chartSQL.Series[0].IsValueShownAsLabel = false;
         }
     }

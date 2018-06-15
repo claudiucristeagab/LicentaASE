@@ -65,7 +65,8 @@ namespace LicentaCristeaClaudiu
                     StringBuilder sb = new StringBuilder();
                     sb.Append("SELECT TABLE_SCHEMA, TABLE_NAME ");
                     sb.Append("FROM INFORMATION_SCHEMA.TABLES ");
-                    sb.Append("WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_CATALOG='" + MainForm.builder.InitialCatalog.ToString() + "';");
+                    sb.Append("WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_CATALOG='" 
+                        + MainForm.builder.InitialCatalog.ToString() + "';");
                     String sql = sb.ToString();
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -83,9 +84,9 @@ namespace LicentaCristeaClaudiu
                                         sbDT.Append(".");
                                     }
                                 }
-                                listBoxTabela.Items.Add(sbDT.ToString());
-                                listBoxTabela2.Items.Add(sbDT.ToString());
-                                listBoxTabela3.Items.Add(sbDT.ToString());
+                                listBoxTabelaSelect.Items.Add(sbDT.ToString());
+                                listBoxTabelaCondition1.Items.Add(sbDT.ToString());
+                                listBoxTabelaCondition2.Items.Add(sbDT.ToString());
                             }
                         }
                     }
@@ -109,7 +110,7 @@ namespace LicentaCristeaClaudiu
             }
         }
 
-        private void getSelectionList(ListBox lb, ListBox lb2)
+        private void getSelectionList(ListBox listBoxTables, ListBox listBoxColumns)
         {
             try
             {
@@ -121,20 +122,20 @@ namespace LicentaCristeaClaudiu
                     StringBuilder sb = new StringBuilder();
                     sb.Append("SELECT column_name ");
                     sb.Append("FROM INFORMATION_SCHEMA.COLUMNS ");
-                    String tableName= lb.SelectedItem.ToString();
+                    String tableName= listBoxTables.SelectedItem.ToString();
                     tableName=tableName.Split('.')[1];
                     sb.Append("WHERE TABLE_NAME = '"+ tableName + "';");
                     String sql = sb.ToString();
-                    lb2.Items.Clear();
+                    listBoxColumns.Items.Clear();
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             dt.Load(reader);
-                            lb2.Items.Add("*");
+                            listBoxColumns.Items.Add("*");
                             for (int i = 0; i < dt.Rows.Count; i++)
                             {
-                                lb2.Items.Add(dt.Rows[i][0].ToString());
+                                listBoxColumns.Items.Add(dt.Rows[i][0].ToString());
                             }
                         }
                     }
@@ -158,7 +159,7 @@ namespace LicentaCristeaClaudiu
             }
         }
 
-        private void getSelectionListNotAll(ListBox lb, ListBox lb2)
+        private void getSelectionListNotAll(ListBox listBoxTables, ListBox listBoxColumns)
         {
             try
             {
@@ -170,11 +171,11 @@ namespace LicentaCristeaClaudiu
                     StringBuilder sb = new StringBuilder();
                     sb.Append("SELECT column_name ");
                     sb.Append("FROM INFORMATION_SCHEMA.COLUMNS ");
-                    String tableName = lb.SelectedItem.ToString();
+                    String tableName = listBoxTables.SelectedItem.ToString();
                     tableName = tableName.Split('.')[1];
                     sb.Append("WHERE TABLE_NAME = '" + tableName + "';");
                     String sql = sb.ToString();
-                    lb2.Items.Clear();
+                    listBoxColumns.Items.Clear();
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -182,7 +183,7 @@ namespace LicentaCristeaClaudiu
                             dt.Load(reader);
                             for (int i = 0; i < dt.Rows.Count; i++)
                             {
-                                lb2.Items.Add(dt.Rows[i][0].ToString());
+                                listBoxColumns.Items.Add(dt.Rows[i][0].ToString());
                             }
                         }
                     }
@@ -320,37 +321,44 @@ namespace LicentaCristeaClaudiu
 
         private void buttonAddSelectFrom_Click(object sender, EventArgs e)
         {
-            if (!sqlSelectCreator.FromList.Contains(listBoxTabela.SelectedItem.ToString()))
+            if (listBoxSelect.SelectedItems.Count != 1 && checkBoxAggregator.Checked)
             {
-                sqlSelectCreator.FromList.Add(listBoxTabela.SelectedItem.ToString());
+                MessageBox.Show("Please select only ONE column if the aggregation check box is checked.");
             }
-            for (int i = 0; i < listBoxSelect.SelectedItems.Count; i++)
+            else
             {
-                StringBuilder sb = new StringBuilder();
-                if (checkBoxAggregator.Checked)
+                if (!sqlSelectCreator.FromList.Contains(listBoxTabelaSelect.SelectedItem.ToString()))
                 {
-                    sb.Append(comboBoxAggregator.SelectedItem.ToString() + "(");
-                }                
-                sb.Append(listBoxTabela.SelectedItem.ToString());
-                sb.Append(".");
-                sb.Append(listBoxSelect.SelectedItems[i].ToString());
-                if (!sqlSelectCreator.SelectList.Contains(sb.ToString()))
+                    sqlSelectCreator.FromList.Add(listBoxTabelaSelect.SelectedItem.ToString());
+                }
+                for (int i = 0; i < listBoxSelect.SelectedItems.Count; i++)
                 {
+                    StringBuilder stringBuilder = new StringBuilder();
                     if (checkBoxAggregator.Checked)
                     {
-                        sb.Append(")");
+                        stringBuilder.Append(comboBoxAggregator.SelectedItem.ToString() + "(");
                     }
-                    if (!String.Empty.Equals(textBoxAlias.Text))
+                    stringBuilder.Append(listBoxTabelaSelect.SelectedItem.ToString());
+                    stringBuilder.Append(".");
+                    stringBuilder.Append(listBoxSelect.SelectedItems[i].ToString());
+                    if (!sqlSelectCreator.SelectList.Contains(stringBuilder.ToString()))
                     {
-                        sb.Append(" " + textBoxAlias.Text);
+                        if (checkBoxAggregator.Checked)
+                        {
+                            stringBuilder.Append(")");
+                        }
+                        if (!String.Empty.Equals(textBoxAlias.Text))
+                        {
+                            stringBuilder.Append(" " + textBoxAlias.Text);
+                        }
+                        sqlSelectCreator.SelectList.Add(stringBuilder.ToString());
                     }
-                    sqlSelectCreator.SelectList.Add(sb.ToString());
+
                 }
-                
-            }
-            listBoxSelect.ClearSelected();
-            checkBoxAggregator.Checked = false;
-            textBoxSQL.Text = sqlSelectCreator.ToString();
+                listBoxSelect.ClearSelected();
+                checkBoxAggregator.Checked = false;
+                refreshCommand();
+            }       
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -365,17 +373,17 @@ namespace LicentaCristeaClaudiu
 
         private void listBoxTabela_SelectedValueChanged(object sender, EventArgs e)
         {
-            getSelectionList(listBoxTabela,listBoxSelect);
+            getSelectionList(listBoxTabelaSelect,listBoxSelect);
         }
 
         private void listBoxTabela2_SelectedValueChanged(object sender, EventArgs e)
         {
-            getSelectionListNotAll(listBoxTabela2, listBoxSelect2);
+            getSelectionListNotAll(listBoxTabelaCondition1, listBoxSelect2);
         }
 
         private void listBoxTabela3_SelectedValueChanged(object sender, EventArgs e)
         {
-            getSelectionListNotAll(listBoxTabela3, listBoxSelect3);
+            getSelectionListNotAll(listBoxTabelaCondition2, listBoxSelect3);
         }
 
         private void buttonAddCondition_Click(object sender, EventArgs e)
@@ -384,7 +392,7 @@ namespace LicentaCristeaClaudiu
             NumberStringChecker nsc = new NumberStringChecker();
             if (radioButtonColumnInput.Checked)
             {
-                sb.Append(listBoxTabela2.SelectedItem.ToString() + "." + listBoxSelect2.SelectedItem.ToString());
+                sb.Append(listBoxTabelaCondition1.SelectedItem.ToString() + "." + listBoxSelect2.SelectedItem.ToString());
                 sb.Append(getSelectedComparator());
                 sb.Append(nsc.TransformIfString(textBoxWhereInput.Text.ToString()));
             }
@@ -392,9 +400,9 @@ namespace LicentaCristeaClaudiu
             {
                 if (radioButtonColumnColumn.Checked)
                 {
-                    sb.Append(listBoxTabela2.SelectedItem.ToString() + "." + listBoxSelect2.SelectedItem.ToString());
+                    sb.Append(listBoxTabelaCondition1.SelectedItem.ToString() + "." + listBoxSelect2.SelectedItem.ToString());
                     sb.Append(getSelectedComparator());
-                    sb.Append(listBoxTabela3.SelectedItem.ToString() + "." + listBoxSelect3.SelectedItem.ToString());
+                    sb.Append(listBoxTabelaCondition2.SelectedItem.ToString() + "." + listBoxSelect3.SelectedItem.ToString());
                 }
             }
             String s = sb.ToString();
@@ -458,7 +466,7 @@ namespace LicentaCristeaClaudiu
 
         private void buttonAddOrderBy_Click(object sender, EventArgs e)
         {
-            OrderBySqlComponent component = new OrderBySqlComponent();
+            SqlSelectOrderBy component = new SqlSelectOrderBy();
             if (!String.IsNullOrEmpty(comboBoxOrderBy.SelectedItem.ToString()))
             {
                 component.Column = comboBoxOrderBy.SelectedItem.ToString();
@@ -607,7 +615,7 @@ namespace LicentaCristeaClaudiu
         private void fillListViewDeleteOrdering()
         {
             listViewDeleteOrdering.Items.Clear();
-            foreach (OrderBySqlComponent o in sqlSelectCreator.OrderByList)
+            foreach (SqlSelectOrderBy o in sqlSelectCreator.OrderByList)
             {
                 listViewDeleteOrdering.Items.Add(new ListViewItem(o.ToString()));
             }

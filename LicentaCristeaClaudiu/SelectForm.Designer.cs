@@ -30,11 +30,10 @@
         {
             this.labelSelectItems = new System.Windows.Forms.Label();
             this.labelTable = new System.Windows.Forms.Label();
-            this.listBoxTabela = new System.Windows.Forms.ListBox();
+            this.listBoxTabelaSelect = new System.Windows.Forms.ListBox();
             this.sqlSelectFormOK = new System.Windows.Forms.Button();
             this.sqlSelectFormCancel = new System.Windows.Forms.Button();
             this.textBoxSQL = new System.Windows.Forms.TextBox();
-            this.buttonAddSelectFrom = new System.Windows.Forms.Button();
             this.buttonDisplayCommand = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radioButtonColumnColumn = new System.Windows.Forms.RadioButton();
@@ -53,13 +52,13 @@
             this.listBoxSelect3 = new System.Windows.Forms.ListBox();
             this.listBoxSelect2 = new System.Windows.Forms.ListBox();
             this.labelTable3 = new System.Windows.Forms.Label();
-            this.listBoxTabela3 = new System.Windows.Forms.ListBox();
+            this.listBoxTabelaCondition2 = new System.Windows.Forms.ListBox();
             this.labelSelectItem3 = new System.Windows.Forms.Label();
             this.listBoxComparator = new System.Windows.Forms.ListBox();
             this.labelWhereInput = new System.Windows.Forms.Label();
             this.textBoxWhereInput = new System.Windows.Forms.TextBox();
             this.labelTable2 = new System.Windows.Forms.Label();
-            this.listBoxTabela2 = new System.Windows.Forms.ListBox();
+            this.listBoxTabelaCondition1 = new System.Windows.Forms.ListBox();
             this.labelSelectItems2 = new System.Windows.Forms.Label();
             this.tabPageGroupBy = new System.Windows.Forms.TabPage();
             this.buttonAddGroupBy = new System.Windows.Forms.Button();
@@ -73,8 +72,6 @@
             this.labelOrderBy = new System.Windows.Forms.Label();
             this.comboBoxOrderBy = new System.Windows.Forms.ComboBox();
             this.tabPageSelections = new System.Windows.Forms.TabPage();
-            this.buttonNewCommand = new System.Windows.Forms.Button();
-            this.buttonTestCommand = new System.Windows.Forms.Button();
             this.tableLayoutPanelDelete = new System.Windows.Forms.TableLayoutPanel();
             this.listViewDeleteConditions = new System.Windows.Forms.ListView();
             this.listViewDeleteSelection = new System.Windows.Forms.ListView();
@@ -84,6 +81,9 @@
             this.laberDeleteOrdering = new System.Windows.Forms.Label();
             this.listViewDeleteGroups = new System.Windows.Forms.ListView();
             this.listViewDeleteOrdering = new System.Windows.Forms.ListView();
+            this.buttonNewCommand = new System.Windows.Forms.Button();
+            this.buttonTestCommand = new System.Windows.Forms.Button();
+            this.buttonAddSelectFrom = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControlSelect.SuspendLayout();
             this.tabPageSelectFrom.SuspendLayout();
@@ -118,13 +118,13 @@
             // 
             // listBoxTabela
             // 
-            this.listBoxTabela.FormattingEnabled = true;
-            this.listBoxTabela.ItemHeight = 16;
-            this.listBoxTabela.Location = new System.Drawing.Point(9, 23);
-            this.listBoxTabela.Name = "listBoxTabela";
-            this.listBoxTabela.Size = new System.Drawing.Size(243, 276);
-            this.listBoxTabela.TabIndex = 4;
-            this.listBoxTabela.SelectedValueChanged += new System.EventHandler(this.listBoxTabela_SelectedValueChanged);
+            this.listBoxTabelaSelect.FormattingEnabled = true;
+            this.listBoxTabelaSelect.ItemHeight = 16;
+            this.listBoxTabelaSelect.Location = new System.Drawing.Point(9, 23);
+            this.listBoxTabelaSelect.Name = "listBoxTabela";
+            this.listBoxTabelaSelect.Size = new System.Drawing.Size(243, 276);
+            this.listBoxTabelaSelect.TabIndex = 4;
+            this.listBoxTabelaSelect.SelectedValueChanged += new System.EventHandler(this.listBoxTabela_SelectedValueChanged);
             // 
             // sqlSelectFormOK
             // 
@@ -159,17 +159,6 @@
             this.textBoxSQL.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxSQL.Size = new System.Drawing.Size(598, 66);
             this.textBoxSQL.TabIndex = 7;
-            // 
-            // buttonAddSelectFrom
-            // 
-            this.buttonAddSelectFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAddSelectFrom.Location = new System.Drawing.Point(539, 23);
-            this.buttonAddSelectFrom.Name = "buttonAddSelectFrom";
-            this.buttonAddSelectFrom.Size = new System.Drawing.Size(45, 23);
-            this.buttonAddSelectFrom.TabIndex = 8;
-            this.buttonAddSelectFrom.Text = "+";
-            this.buttonAddSelectFrom.UseVisualStyleBackColor = true;
-            this.buttonAddSelectFrom.Click += new System.EventHandler(this.buttonAddSelectFrom_Click);
             // 
             // buttonDisplayCommand
             // 
@@ -245,15 +234,15 @@
             // 
             // tabPageSelectFrom
             // 
+            this.tabPageSelectFrom.Controls.Add(this.buttonAddSelectFrom);
             this.tabPageSelectFrom.Controls.Add(this.textBoxAlias);
             this.tabPageSelectFrom.Controls.Add(this.labelAlias);
             this.tabPageSelectFrom.Controls.Add(this.checkBoxAggregator);
             this.tabPageSelectFrom.Controls.Add(this.comboBoxAggregator);
             this.tabPageSelectFrom.Controls.Add(this.listBoxSelect);
             this.tabPageSelectFrom.Controls.Add(this.labelTable);
-            this.tabPageSelectFrom.Controls.Add(this.listBoxTabela);
+            this.tabPageSelectFrom.Controls.Add(this.listBoxTabelaSelect);
             this.tabPageSelectFrom.Controls.Add(this.labelSelectItems);
-            this.tabPageSelectFrom.Controls.Add(this.buttonAddSelectFrom);
             this.tabPageSelectFrom.Location = new System.Drawing.Point(4, 25);
             this.tabPageSelectFrom.Name = "tabPageSelectFrom";
             this.tabPageSelectFrom.Padding = new System.Windows.Forms.Padding(3);
@@ -268,7 +257,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxAlias.Location = new System.Drawing.Point(258, 335);
             this.textBoxAlias.Name = "textBoxAlias";
-            this.textBoxAlias.Size = new System.Drawing.Size(275, 22);
+            this.textBoxAlias.Size = new System.Drawing.Size(326, 22);
             this.textBoxAlias.TabIndex = 15;
             // 
             // labelAlias
@@ -308,7 +297,7 @@
             this.listBoxSelect.Location = new System.Drawing.Point(258, 23);
             this.listBoxSelect.Name = "listBoxSelect";
             this.listBoxSelect.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxSelect.Size = new System.Drawing.Size(275, 276);
+            this.listBoxSelect.Size = new System.Drawing.Size(326, 276);
             this.listBoxSelect.TabIndex = 9;
             // 
             // tabPageWhere
@@ -319,13 +308,13 @@
             this.tabPageWhere.Controls.Add(this.listBoxSelect3);
             this.tabPageWhere.Controls.Add(this.listBoxSelect2);
             this.tabPageWhere.Controls.Add(this.labelTable3);
-            this.tabPageWhere.Controls.Add(this.listBoxTabela3);
+            this.tabPageWhere.Controls.Add(this.listBoxTabelaCondition2);
             this.tabPageWhere.Controls.Add(this.labelSelectItem3);
             this.tabPageWhere.Controls.Add(this.listBoxComparator);
             this.tabPageWhere.Controls.Add(this.labelWhereInput);
             this.tabPageWhere.Controls.Add(this.textBoxWhereInput);
             this.tabPageWhere.Controls.Add(this.labelTable2);
-            this.tabPageWhere.Controls.Add(this.listBoxTabela2);
+            this.tabPageWhere.Controls.Add(this.listBoxTabelaCondition1);
             this.tabPageWhere.Controls.Add(this.labelSelectItems2);
             this.tabPageWhere.Controls.Add(this.panel1);
             this.tabPageWhere.Controls.Add(this.buttonAddCondition);
@@ -392,13 +381,13 @@
             // 
             // listBoxTabela3
             // 
-            this.listBoxTabela3.FormattingEnabled = true;
-            this.listBoxTabela3.ItemHeight = 16;
-            this.listBoxTabela3.Location = new System.Drawing.Point(9, 221);
-            this.listBoxTabela3.Name = "listBoxTabela3";
-            this.listBoxTabela3.Size = new System.Drawing.Size(243, 100);
-            this.listBoxTabela3.TabIndex = 22;
-            this.listBoxTabela3.SelectedValueChanged += new System.EventHandler(this.listBoxTabela3_SelectedValueChanged);
+            this.listBoxTabelaCondition2.FormattingEnabled = true;
+            this.listBoxTabelaCondition2.ItemHeight = 16;
+            this.listBoxTabelaCondition2.Location = new System.Drawing.Point(9, 221);
+            this.listBoxTabelaCondition2.Name = "listBoxTabela3";
+            this.listBoxTabelaCondition2.Size = new System.Drawing.Size(243, 100);
+            this.listBoxTabelaCondition2.TabIndex = 22;
+            this.listBoxTabelaCondition2.SelectedValueChanged += new System.EventHandler(this.listBoxTabela3_SelectedValueChanged);
             // 
             // labelSelectItem3
             // 
@@ -452,13 +441,13 @@
             // 
             // listBoxTabela2
             // 
-            this.listBoxTabela2.FormattingEnabled = true;
-            this.listBoxTabela2.ItemHeight = 16;
-            this.listBoxTabela2.Location = new System.Drawing.Point(9, 23);
-            this.listBoxTabela2.Name = "listBoxTabela2";
-            this.listBoxTabela2.Size = new System.Drawing.Size(243, 100);
-            this.listBoxTabela2.TabIndex = 15;
-            this.listBoxTabela2.SelectedValueChanged += new System.EventHandler(this.listBoxTabela2_SelectedValueChanged);
+            this.listBoxTabelaCondition1.FormattingEnabled = true;
+            this.listBoxTabelaCondition1.ItemHeight = 16;
+            this.listBoxTabelaCondition1.Location = new System.Drawing.Point(9, 23);
+            this.listBoxTabelaCondition1.Name = "listBoxTabela2";
+            this.listBoxTabelaCondition1.Size = new System.Drawing.Size(243, 100);
+            this.listBoxTabelaCondition1.TabIndex = 15;
+            this.listBoxTabelaCondition1.SelectedValueChanged += new System.EventHandler(this.listBoxTabela2_SelectedValueChanged);
             // 
             // labelSelectItems2
             // 
@@ -604,29 +593,6 @@
             this.tabPageSelections.Text = "Selections";
             this.tabPageSelections.UseVisualStyleBackColor = true;
             // 
-            // buttonNewCommand
-            // 
-            this.buttonNewCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonNewCommand.Location = new System.Drawing.Point(93, 535);
-            this.buttonNewCommand.Name = "buttonNewCommand";
-            this.buttonNewCommand.Size = new System.Drawing.Size(150, 46);
-            this.buttonNewCommand.TabIndex = 13;
-            this.buttonNewCommand.Text = "Reset";
-            this.buttonNewCommand.UseVisualStyleBackColor = true;
-            this.buttonNewCommand.Click += new System.EventHandler(this.buttonNewCommand_Click);
-            // 
-            // buttonTestCommand
-            // 
-            this.buttonTestCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonTestCommand.Location = new System.Drawing.Point(250, 535);
-            this.buttonTestCommand.Name = "buttonTestCommand";
-            this.buttonTestCommand.Size = new System.Drawing.Size(123, 46);
-            this.buttonTestCommand.TabIndex = 14;
-            this.buttonTestCommand.Text = "Test";
-            this.buttonTestCommand.UseVisualStyleBackColor = true;
-            this.buttonTestCommand.Click += new System.EventHandler(this.buttonTestCommand_Click);
-            // 
             // tableLayoutPanelDelete
             // 
             this.tableLayoutPanelDelete.ColumnCount = 2;
@@ -732,6 +698,40 @@
             this.listViewDeleteOrdering.View = System.Windows.Forms.View.List;
             this.listViewDeleteOrdering.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listViewDeleteOrdering_KeyDown);
             // 
+            // buttonNewCommand
+            // 
+            this.buttonNewCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonNewCommand.Location = new System.Drawing.Point(93, 535);
+            this.buttonNewCommand.Name = "buttonNewCommand";
+            this.buttonNewCommand.Size = new System.Drawing.Size(150, 46);
+            this.buttonNewCommand.TabIndex = 13;
+            this.buttonNewCommand.Text = "Reset";
+            this.buttonNewCommand.UseVisualStyleBackColor = true;
+            this.buttonNewCommand.Click += new System.EventHandler(this.buttonNewCommand_Click);
+            // 
+            // buttonTestCommand
+            // 
+            this.buttonTestCommand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonTestCommand.Location = new System.Drawing.Point(250, 535);
+            this.buttonTestCommand.Name = "buttonTestCommand";
+            this.buttonTestCommand.Size = new System.Drawing.Size(123, 46);
+            this.buttonTestCommand.TabIndex = 14;
+            this.buttonTestCommand.Text = "Test";
+            this.buttonTestCommand.UseVisualStyleBackColor = true;
+            this.buttonTestCommand.Click += new System.EventHandler(this.buttonTestCommand_Click);
+            // 
+            // buttonAddSelectFrom
+            // 
+            this.buttonAddSelectFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAddSelectFrom.Location = new System.Drawing.Point(509, 364);
+            this.buttonAddSelectFrom.Name = "buttonAddSelectFrom";
+            this.buttonAddSelectFrom.Size = new System.Drawing.Size(75, 46);
+            this.buttonAddSelectFrom.TabIndex = 16;
+            this.buttonAddSelectFrom.Text = "Add";
+            this.buttonAddSelectFrom.UseVisualStyleBackColor = true;
+            this.buttonAddSelectFrom.Click += new System.EventHandler(this.buttonAddSelectFrom_Click);
+            // 
             // SelectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -771,11 +771,10 @@
 
         private System.Windows.Forms.Label labelSelectItems;
         private System.Windows.Forms.Label labelTable;
-        private System.Windows.Forms.ListBox listBoxTabela;
+        private System.Windows.Forms.ListBox listBoxTabelaSelect;
         private System.Windows.Forms.Button sqlSelectFormOK;
         private System.Windows.Forms.Button sqlSelectFormCancel;
         private System.Windows.Forms.TextBox textBoxSQL;
-        private System.Windows.Forms.Button buttonAddSelectFrom;
         private System.Windows.Forms.Button buttonDisplayCommand;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton radioButtonColumnInput;
@@ -784,14 +783,14 @@
         private System.Windows.Forms.TabPage tabPageSelectFrom;
         private System.Windows.Forms.TabPage tabPageWhere;
         private System.Windows.Forms.Label labelTable2;
-        private System.Windows.Forms.ListBox listBoxTabela2;
+        private System.Windows.Forms.ListBox listBoxTabelaCondition1;
         private System.Windows.Forms.Label labelSelectItems2;
         private System.Windows.Forms.RadioButton radioButtonColumnColumn;
         private System.Windows.Forms.Label labelWhereInput;
         private System.Windows.Forms.TextBox textBoxWhereInput;
         private System.Windows.Forms.ListBox listBoxComparator;
         private System.Windows.Forms.Label labelTable3;
-        private System.Windows.Forms.ListBox listBoxTabela3;
+        private System.Windows.Forms.ListBox listBoxTabelaCondition2;
         private System.Windows.Forms.Label labelSelectItem3;
         private System.Windows.Forms.Button buttonNewCommand;
         private System.Windows.Forms.ListBox listBoxSelect2;
@@ -825,5 +824,6 @@
         private System.Windows.Forms.Label laberDeleteOrdering;
         private System.Windows.Forms.ListView listViewDeleteGroups;
         private System.Windows.Forms.ListView listViewDeleteOrdering;
+        private System.Windows.Forms.Button buttonAddSelectFrom;
     }
 }

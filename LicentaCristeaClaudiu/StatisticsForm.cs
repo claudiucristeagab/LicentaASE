@@ -22,7 +22,7 @@ namespace LicentaCristeaClaudiu
             this.dataGridView = dataGridView;
             this.statisticsHelper = new StatisticsHelper(dataGridView);
 
-            String[] statisticOperations = { "Descriptive Statistics", "Descriptive Statistics Population", "Correlation", "Linear Regression", "LinearRegressionSimpleOneColumn" };
+            String[] statisticOperations = { "Descriptive Statistics", "Descriptive Statistics for Population", "Correlation", "Simple Linear Regression", "Extrapolation" };
             comboBox1.Items.AddRange(statisticOperations); 
 
         }
@@ -43,20 +43,36 @@ namespace LicentaCristeaClaudiu
         {
             switch (comboBox1.SelectedIndex)
             {
-                case (int) EStatistics.DescriptiveStatistics:
+                case 0:
                     statisticsHelper.DescriptiveStatistics(dataGridViewStatistics);
                     break;
-                case (int)EStatistics.DescriptiveStatisticsPopulation:
+                case 1:
                     statisticsHelper.DescriptiveStatisticsPopulation(dataGridViewStatistics);
                     break;
-                case (int)EStatistics.Correlation:
+                case 2:
                     statisticsHelper.Correlation(dataGridViewStatistics);
                     break;
                 case 3:
-                    statisticsHelper.LinearRegressionSimple(dataGridViewStatistics, new int[] { 0, 1 });
+                    if (dataGridView.ColumnCount >= 2)
+                    {
+                        int[] selectedColumns = new int[2];
+                        StatisticsRegressionForm statisticsRegressionForm = new StatisticsRegressionForm(selectedColumns, dataGridView);
+                        statisticsRegressionForm.ShowDialog();
+                        if (selectedColumns != null)
+                        {
+                            statisticsHelper.LinearRegressionSimple(dataGridViewStatistics, selectedColumns);
+                        }                                      
+                    }
+                    else
+                    {
+                        MessageBox.Show("There are not enough columns in the data set.");
+                    }
                     break;
                 case 4:
-                    statisticsHelper.LinearRegressionSimpleOneColumn(dataGridViewStatistics, 0);
+                    int[] selectedColumnnrOfPredictions = new int[2];
+                    StatisticsExtrapolationForm statisticsExtrapolationForm = new StatisticsExtrapolationForm(dataGridView, selectedColumnnrOfPredictions);
+                    statisticsExtrapolationForm.ShowDialog();
+                    statisticsHelper.Extrapolation(dataGridViewStatistics, selectedColumnnrOfPredictions[0], selectedColumnnrOfPredictions[1]);
                     break;
             }
         }

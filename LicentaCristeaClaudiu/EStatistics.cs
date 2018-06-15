@@ -12,6 +12,6 @@ namespace LicentaCristeaClaudiu
         DescriptiveStatisticsPopulation,
         Correlation,
         LinearRegressionSimple,
-        LinearRegressionSimpleOneColumn
+        LinearTrend
     }
 }

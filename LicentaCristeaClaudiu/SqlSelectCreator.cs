@@ -12,7 +12,7 @@ namespace LicentaCristeaClaudiu
         private List<String> fromList;
         private List<String> whereList;
         private List<String> groupByList;
-        private List<OrderBySqlComponent> orderByList;
+        private List<SqlSelectOrderBy> orderByList;
         
         private String[] specialCharacters = {"(",")","AND","OR"};
 
@@ -21,7 +21,7 @@ namespace LicentaCristeaClaudiu
             this.selectList = new List<String>();
             this.fromList = new List<String>();
             this.whereList = new List<String>();
-            this.orderByList = new List<OrderBySqlComponent>();
+            this.orderByList = new List<SqlSelectOrderBy>();
             this.groupByList = new List<String>();
         }
 
@@ -64,7 +64,7 @@ namespace LicentaCristeaClaudiu
             }
         }
 
-        public List<OrderBySqlComponent> OrderByList
+        public List<SqlSelectOrderBy> OrderByList
         {
             get
             {

@@ -23,7 +23,6 @@ namespace LicentaCristeaClaudiu
 
         public void ExportToExcel()
         {
-            //dataGridView.DefaultCellStyle.FormatProvider = new CultureInfo("en-GB");
             if (dataGridView.Rows.Count > 0)
             {
                 saveFileDialog.RestoreDirectory = false;
@@ -33,10 +32,9 @@ namespace LicentaCristeaClaudiu
                     Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
                     Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
                     Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-                    worksheet = workbook.Sheets["Sheet1"];
+                    worksheet = workbook.Sheets["Export sheet"];
                     worksheet = workbook.ActiveSheet;
-                    worksheet.Name = "Export Tabela";
-
+                    worksheet.Name = "Export Table";
                     for (int i = 1; i < dataGridView.Columns.Count + 1; i++)
                     {
                         worksheet.Cells[1, i] = dataGridView.Columns[i - 1].HeaderText;
@@ -48,9 +46,10 @@ namespace LicentaCristeaClaudiu
                             worksheet.Cells[i + 2, j + 1] = dataGridView.Rows[i].Cells[j].Value.ToString();
                         }
                     }
-                    //app.Visible = true;
-
-                    workbook.SaveAs(saveFileDialog.FileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                    workbook.SaveAs(saveFileDialog.FileName, Type.Missing, Type.Missing, 
+                        Type.Missing, Type.Missing, Type.Missing, 
+                        Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, 
+                        Type.Missing, Type.Missing);
                     app.Quit();
                 }
             }

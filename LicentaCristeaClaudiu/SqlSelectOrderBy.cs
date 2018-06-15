@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace LicentaCristeaClaudiu
 {
-    class OrderBySqlComponent
+    class SqlSelectOrderBy
     {
         private String column;
         private Boolean isAscendent;
 
-        public OrderBySqlComponent()
+        public SqlSelectOrderBy()
         {
 
         }
 
-        public OrderBySqlComponent(string column, Boolean isAscendent)
+        public SqlSelectOrderBy(string column, Boolean isAscendent)
         {
             this.column = column;
             this.isAscendent = isAscendent;
