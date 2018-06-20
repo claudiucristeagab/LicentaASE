@@ -22,7 +22,7 @@ namespace LicentaCristeaClaudiu
             this.dataGridView = dataGridView;
             this.statisticsHelper = new StatisticsHelper(dataGridView);
 
-            String[] statisticOperations = { "Descriptive Statistics", "Descriptive Statistics for Population", "Correlation", "Simple Linear Regression", "Extrapolation" };
+            String[] statisticOperations = { "Descriptive Statistics", "Descriptive Statistics for Population", "Correlation", "Simple Linear Regression", "Extrapolation", "One-Way Frequency" };
             comboBox1.Items.AddRange(statisticOperations); 
 
         }
@@ -69,10 +69,16 @@ namespace LicentaCristeaClaudiu
                     }
                     break;
                 case 4:
-                    int[] selectedColumnnrOfPredictions = new int[2];
-                    StatisticsExtrapolationForm statisticsExtrapolationForm = new StatisticsExtrapolationForm(dataGridView, selectedColumnnrOfPredictions);
+                    int[] selectedColumnNrOfPredictions = new int[2];
+                    StatisticsExtrapolationForm statisticsExtrapolationForm = new StatisticsExtrapolationForm(dataGridView, selectedColumnNrOfPredictions);
                     statisticsExtrapolationForm.ShowDialog();
-                    statisticsHelper.Extrapolation(dataGridViewStatistics, selectedColumnnrOfPredictions[0], selectedColumnnrOfPredictions[1]);
+                    statisticsHelper.Extrapolation(dataGridViewStatistics, selectedColumnNrOfPredictions[0], selectedColumnNrOfPredictions[1]);
+                    break;
+                case 5:
+                    int[] selectedColumn = new int[1];
+                    StatisticsOneWayFreqForm statisticsOneWayFreqForm = new StatisticsOneWayFreqForm(dataGridView, selectedColumn);
+                    statisticsOneWayFreqForm.ShowDialog();
+                    statisticsHelper.OneWayFrequency(dataGridViewStatistics, selectedColumn[0]);
                     break;
             }
         }

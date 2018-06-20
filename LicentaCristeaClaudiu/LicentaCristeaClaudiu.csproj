@@ -188,6 +188,12 @@
     <Compile Include="StatisticsExtrapolationForm.Designer.cs">
       <DependentUpon>StatisticsExtrapolationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="StatisticsOneWayFreqForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatisticsOneWayFreqForm.Designer.cs">
+      <DependentUpon>StatisticsOneWayFreqForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StatisticsRegressionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StatisticsExtrapolationForm.resx">
       <DependentUpon>StatisticsExtrapolationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StatisticsOneWayFreqForm.resx">
+      <DependentUpon>StatisticsOneWayFreqForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StatisticsRegressionForm.resx">
       <DependentUpon>StatisticsRegressionForm.cs</DependentUpon>

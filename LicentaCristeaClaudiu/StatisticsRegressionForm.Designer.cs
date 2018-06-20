@@ -99,7 +99,7 @@
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.Name = "StatisticsRegressionForm";
-            this.Text = "StatisticsRegressionForm";
+            this.Text = "Regression";
             this.ResumeLayout(false);
             this.PerformLayout();
 

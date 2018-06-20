@@ -89,9 +89,15 @@ namespace LicentaCristeaClaudiu
 
         private void statisticsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Prototip
-            StatisticsForm statisticsForm = new StatisticsForm(dataGridViewMain);
-            statisticsForm.ShowDialog();
+            if (dataGridViewMain.Rows.Count > 0 && dataGridViewMain.Columns.Count > 0)
+            {
+                StatisticsForm statisticsForm = new StatisticsForm(dataGridViewMain);
+                statisticsForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void updateTableToolStripMenuItem_Click(object sender, EventArgs e)

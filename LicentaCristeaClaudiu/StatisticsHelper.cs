@@ -456,6 +456,54 @@ namespace LicentaCristeaClaudiu
             }
         }
 
+        public void OneWayFrequency(DataGridView dataGridViewStatistics, int selectedColumn)
+        {
+            NumberStringChecker nsc = new NumberStringChecker();
+            List<String> listOfUniqueValues = new List<String>();
+            for (int i = 0; i < dataGridView.Rows.Count; i++)
+            {
+                if (!listOfUniqueValues.Contains(dataGridView.Rows[i].Cells[selectedColumn].Value.ToString()))
+                {
+                    listOfUniqueValues.Add(dataGridView.Rows[i].Cells[selectedColumn].Value.ToString());
+                }
+            }
+            
+            int numberOfValues = dataGridView.Rows.Count;
+
+            DataTable oneWayFreqDataTable = new DataTable("One-Way Frequency");
+            DataColumn columnDataColumn = new DataColumn(dataGridView.Columns[selectedColumn].Name.ToString());
+            DataColumn frequencyDataColumn = new DataColumn("Frequency");
+            DataColumn percentDataColumn = new DataColumn("Percent");
+            DataColumn cumulativePercentDataColumn = new DataColumn("Cumulative Percent");
+            oneWayFreqDataTable.Columns.Add(columnDataColumn);
+            oneWayFreqDataTable.Columns.Add(frequencyDataColumn);
+            oneWayFreqDataTable.Columns.Add(percentDataColumn);
+            oneWayFreqDataTable.Columns.Add(cumulativePercentDataColumn);
+
+            double cumulativePercent = 0;
+            foreach (String value in listOfUniqueValues)
+            {
+                DataRow dataRow = oneWayFreqDataTable.NewRow();
+                double count = 0;
+                for (int i = 0; i< dataGridView.Rows.Count; i++)
+                {
+                    if (dataGridView.Rows[i].Cells[selectedColumn].Value.ToString().Equals(value))
+                    {
+                        count++;
+                    }
+                }
+                dataRow[dataGridView.Columns[selectedColumn].Name.ToString()] = value;
+                dataRow["Frequency"] = count;
+                dataRow["Percent"] = Math.Round(count / numberOfValues * 100,2);
+                cumulativePercent += count / numberOfValues * 100;
+                dataRow["Cumulative Percent"] = Math.Round(cumulativePercent,2);
+                oneWayFreqDataTable.Rows.Add(dataRow);
+            }
+
+            dataGridViewStatistics.DataSource = null;
+            dataGridViewStatistics.DataSource = oneWayFreqDataTable;
+        }
+
         public DataTable OutputDescriptiveStatistics()
         {
             NumberStringChecker nsc = new NumberStringChecker();

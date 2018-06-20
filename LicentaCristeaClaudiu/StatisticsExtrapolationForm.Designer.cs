@@ -91,7 +91,7 @@
             this.Controls.Add(this.numericUpDownPredictions);
             this.Controls.Add(this.label1);
             this.Name = "StatisticsExtrapolationForm";
-            this.Text = "StatisticsInterpolationForm";
+            this.Text = "Extrapolation";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPredictions)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

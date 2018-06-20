@@ -13,13 +13,13 @@ namespace LicentaCristeaClaudiu
     public partial class StatisticsExtrapolationForm : Form
     {
         DataGridView dataGridView;
-        int[] selectedColumnnrOfPredictions;
+        int[] selectedColumnNrOfPredictions;
 
         public StatisticsExtrapolationForm(DataGridView dataGridView, int[] selectedColumnnrOfPredictions)
         {
             InitializeComponent();
             this.dataGridView = dataGridView;
-            this.selectedColumnnrOfPredictions = selectedColumnnrOfPredictions;
+            this.selectedColumnNrOfPredictions = selectedColumnnrOfPredictions;
             numericUpDownPredictions.Maximum = Int32.MaxValue;
             LoadColumns();
         }
@@ -34,8 +34,8 @@ namespace LicentaCristeaClaudiu
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            selectedColumnnrOfPredictions[0] = comboBoxVariable.SelectedIndex;
-            selectedColumnnrOfPredictions[1] = (int) numericUpDownPredictions.Value;
+            selectedColumnNrOfPredictions[0] = comboBoxVariable.SelectedIndex;
+            selectedColumnNrOfPredictions[1] = (int) numericUpDownPredictions.Value;
             this.Close();
         }
     }
