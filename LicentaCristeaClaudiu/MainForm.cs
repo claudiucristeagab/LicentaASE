@@ -157,7 +157,7 @@ namespace LicentaCristeaClaudiu
             {
                 if (builder.ToString() == "")
                 {
-                    MessageBox.Show("Date de logare incorecte!");
+                    MessageBox.Show("Incorrect login data!");
                     startLoginForm(); 
                 }
                 else
@@ -233,7 +233,7 @@ namespace LicentaCristeaClaudiu
 
         private void despreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Proiect de licență făcut de Cristea Claudiu-Gabriel.\nVersiunea din data de 08.06.2018 13:46");
+            MessageBox.Show("Bachelor's project created by Cristea Claudiu-Gabriel.\nVersion from the date of: 20.06.2018 12:00");
         }
 
         private void graphToolStripMenuItem_Click(object sender, EventArgs e)
@@ -245,7 +245,7 @@ namespace LicentaCristeaClaudiu
             }
             else
             {
-                MessageBox.Show("Not enough data.");
+                MessageBox.Show("Not enough data available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
