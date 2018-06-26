@@ -12,7 +12,6 @@ namespace LicentaCristeaClaudiu
 {
     public partial class StatisticsRegressionForm: Form
     {
-        StatisticsForm statisticsFormParent;
         DataGridView dataGridView;
         int[] selectedColumns;
 

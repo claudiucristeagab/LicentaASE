@@ -29,11 +29,6 @@ namespace LicentaCristeaClaudiu
             }
         }
 
-        public void AddToLists(String column, String value)
-        {
-
-        }
-
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

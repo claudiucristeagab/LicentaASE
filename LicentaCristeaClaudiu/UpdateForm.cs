@@ -15,13 +15,11 @@ namespace LicentaCristeaClaudiu
     public partial class UpdateForm : Form
     {
         private List<SqlInsertElement> listSqlInsertElement;
-        private LoginHelper loginHelper;
         private SqlUpdateWhereCreator sqlUpdateWhereCreator;
 
         public UpdateForm()
         {
             InitializeComponent();
-            this.loginHelper = new LoginHelper();
             this.listSqlInsertElement = new List<SqlInsertElement>();
             this.sqlUpdateWhereCreator = new SqlUpdateWhereCreator();
             List<String> comparatorList = new List<String>();
@@ -80,8 +78,7 @@ namespace LicentaCristeaClaudiu
             {
                 if (MainForm.builder.ToString() == "")
                 {
-                    MessageBox.Show("Date de logare incorecte!");
-                    loginHelper.StartLoginForm();
+                    MessageBox.Show("Incorrect login data!");
                 }
                 else
                 {
@@ -160,7 +157,6 @@ namespace LicentaCristeaClaudiu
                 if (MainForm.builder.ToString() == "")
                 {
                     MessageBox.Show("Incorrect login data!");
-                    loginHelper.StartLoginForm();
                 }
                 else
                 {
@@ -208,7 +204,6 @@ namespace LicentaCristeaClaudiu
                 if (MainForm.builder.ToString() == "")
                 {
                     MessageBox.Show("Incorrect login data!");
-                    loginHelper.StartLoginForm();
                 }
                 else
                 {

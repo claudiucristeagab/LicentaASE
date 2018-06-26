@@ -291,11 +291,21 @@ namespace LicentaCristeaClaudiu
 
         private void sqlSelectFormOK_Click(object sender, EventArgs e)
         {
-            if (sqlSelectCreator.WhereList.Count > 0)
+            if(sqlSelectCreator.SelectList.Count > 0)
             {
-                if (sqlSelectCreator.WhereList.Last().Equals("AND") || sqlSelectCreator.WhereList.Last().Equals("OR"))
+                if (sqlSelectCreator.WhereList.Count > 0)
                 {
-                    MessageBox.Show("Please add the next pair as well.");
+                    if (sqlSelectCreator.WhereList.Last().Equals("AND") || sqlSelectCreator.WhereList.Last().Equals("OR"))
+                    {
+                        MessageBox.Show("Please add the next pair as well.");
+                    }
+                    else
+                    {
+                        if (testCommand(sqlSelectCreator.ToString()))
+                        {
+                            sendSelectSQL();
+                        }
+                    }
                 }
                 else
                 {
@@ -307,10 +317,7 @@ namespace LicentaCristeaClaudiu
             }
             else
             {
-                if (testCommand(sqlSelectCreator.ToString()))
-                {
-                    sendSelectSQL();
-                }
+                MessageBox.Show("There are no selected columns. Please add at least one.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
