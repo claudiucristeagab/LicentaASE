@@ -295,45 +295,58 @@ namespace LicentaCristeaClaudiu
                 sb.Append(" ");
                 sb.Append(sqlUpdateWhereCreator.ToString());
             }
-            
+
+            bool willContinue = true;
+
+            if(sqlUpdateWhereCreator.ConditionList.Count == 0)
+            {
+                willContinue = false;
+                if(MessageBox.Show("If you continue you will update ALL of the data in this table. Are you sure?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    willContinue = true;
+                }
+            }
             String sql = sb.ToString();
 
-            try
+            if (willContinue)
             {
-                using (SqlConnection connection = new SqlConnection(MainForm.builder.ConnectionString))
+                try
                 {
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    using (SqlConnection connection = new SqlConnection(MainForm.builder.ConnectionString))
                     {
-                        foreach (SqlInsertElement s in listSqlInsertElement)
+                        using (SqlCommand command = new SqlCommand(sql, connection))
                         {
-                            command.Parameters.AddWithValue("@" + s.Column, s.TextBox.Text);
-                        }
+                            foreach (SqlInsertElement s in listSqlInsertElement)
+                            {
+                                command.Parameters.AddWithValue("@" + s.Column, s.TextBox.Text);
+                            }
 
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                        sqlUpdateWhereCreator.ConditionList.Clear();
-                        MessageBox.Show("Data successfully updated.");
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                            connection.Close();
+                            sqlUpdateWhereCreator.ConditionList.Clear();
+                            MessageBox.Show("Data successfully updated.");
+                        }
+                    }
+
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show(sqlEx.ToString());
+                }
+                catch (InvalidOperationException ex)
+                {
+                    if (MainForm.builder.ToString() == "")
+                    {
+                        MessageBox.Show("Date de logare incorecte!");
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.ToString());
                     }
                 }
-                
             }
-            catch (SqlException sqlEx)
-            {
-                MessageBox.Show(sqlEx.ToString());
-            }
-            catch (InvalidOperationException ex)
-            {
-                if (MainForm.builder.ToString() == "")
-                {
-                    MessageBox.Show("Date de logare incorecte!");
-                    //startLoginForm();
-                }
-                else
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
+            
         }
 
         private void buttonOrCondition_Click(object sender, EventArgs e)
