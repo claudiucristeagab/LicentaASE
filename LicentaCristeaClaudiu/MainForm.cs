@@ -27,7 +27,7 @@ namespace LicentaCristeaClaudiu
         {
             InitializeComponent();
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-GB");
-            startLoginForm();
+            startLoginFormFirstTime();
         }
 
         private void runSQLcommand(SqlConnection connection, String sqlString, DataGridView dgv)
@@ -67,7 +67,6 @@ namespace LicentaCristeaClaudiu
                 if (builder.ToString() == "")
                 {
                     MessageBox.Show("Date de logare incorecte!");
-                    startLoginForm();
                 }
                 else
                 {
@@ -80,7 +79,7 @@ namespace LicentaCristeaClaudiu
             }
         }
 
-        private void startLoginForm()
+        private void startLoginFormFirstTime()
         {
             LoginForm loginForm = new LoginForm();
             loginForm.ShowDialog();
@@ -158,7 +157,6 @@ namespace LicentaCristeaClaudiu
                 if (builder.ToString() == "")
                 {
                     MessageBox.Show("Incorrect login data!");
-                    startLoginForm(); 
                 }
                 else
                 {

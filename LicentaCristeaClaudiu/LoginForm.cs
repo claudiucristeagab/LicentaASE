@@ -125,5 +125,10 @@ namespace LicentaCristeaClaudiu
         {
             Application.Exit();
         }
+
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
+        }
     }
 }

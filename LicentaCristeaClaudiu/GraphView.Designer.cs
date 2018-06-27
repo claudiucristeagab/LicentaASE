@@ -40,12 +40,13 @@
             this.areaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.columnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBoxXvalues = new System.Windows.Forms.ComboBox();
             this.comboBoxYvalues = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialogGraph = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.chartSQL)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -56,6 +57,7 @@
             this.chartSQL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.chartSQL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             chartArea1.Name = "ChartArea1";
             this.chartSQL.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
@@ -95,7 +97,7 @@
             // saveImageToolStripMenuItem
             // 
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.saveImageToolStripMenuItem.Text = "Save Image";
             this.saveImageToolStripMenuItem.Click += new System.EventHandler(this.saveImageToolStripMenuItem_Click);
             // 
@@ -123,35 +125,42 @@
             // areaToolStripMenuItem
             // 
             this.areaToolStripMenuItem.Name = "areaToolStripMenuItem";
-            this.areaToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.areaToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.areaToolStripMenuItem.Text = "Area";
             this.areaToolStripMenuItem.Click += new System.EventHandler(this.areaToolStripMenuItem_Click);
             // 
             // barToolStripMenuItem
             // 
             this.barToolStripMenuItem.Name = "barToolStripMenuItem";
-            this.barToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.barToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.barToolStripMenuItem.Text = "Bar";
             this.barToolStripMenuItem.Click += new System.EventHandler(this.barToolStripMenuItem_Click);
             // 
             // columnToolStripMenuItem
             // 
             this.columnToolStripMenuItem.Name = "columnToolStripMenuItem";
-            this.columnToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.columnToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.columnToolStripMenuItem.Text = "Column";
             this.columnToolStripMenuItem.Click += new System.EventHandler(this.columnToolStripMenuItem_Click);
+            // 
+            // lineToolStripMenuItem
+            // 
+            this.lineToolStripMenuItem.Name = "lineToolStripMenuItem";
+            this.lineToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.lineToolStripMenuItem.Text = "Line";
+            this.lineToolStripMenuItem.Click += new System.EventHandler(this.lineToolStripMenuItem_Click);
             // 
             // pieToolStripMenuItem
             // 
             this.pieToolStripMenuItem.Name = "pieToolStripMenuItem";
-            this.pieToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.pieToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.pieToolStripMenuItem.Text = "Pie";
             this.pieToolStripMenuItem.Click += new System.EventHandler(this.pieToolStripMenuItem_Click);
             // 
             // pointToolStripMenuItem
             // 
             this.pointToolStripMenuItem.Name = "pointToolStripMenuItem";
-            this.pointToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.pointToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
             this.pointToolStripMenuItem.Text = "Point";
             this.pointToolStripMenuItem.Click += new System.EventHandler(this.pointToolStripMenuItem_Click);
             // 
@@ -193,13 +202,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(622, 32);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // lineToolStripMenuItem
-            // 
-            this.lineToolStripMenuItem.Name = "lineToolStripMenuItem";
-            this.lineToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.lineToolStripMenuItem.Text = "Line";
-            this.lineToolStripMenuItem.Click += new System.EventHandler(this.lineToolStripMenuItem_Click);
-            // 
             // GraphView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -237,5 +239,6 @@
         private System.Windows.Forms.ToolStripMenuItem columnToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripMenuItem lineToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogGraph;
     }
 }

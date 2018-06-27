@@ -18,11 +18,11 @@ namespace LicentaCristeaClaudiu
             String text = System.IO.File.ReadAllText(path);
             return text;
         }
-        public void SaveToFile(String path, String sql)
+        public void SaveToFile(String path, String content)
         {
             try
             {
-                System.IO.File.WriteAllText(path, sql);
+                System.IO.File.WriteAllText(path, content);
             }
             catch(System.IO.IOException ex)
             {

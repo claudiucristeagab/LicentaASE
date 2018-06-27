@@ -38,9 +38,18 @@ namespace LicentaCristeaClaudiu
             }
         }  
 
+        private void SaveImage()
+        {
+            saveFileDialogGraph.Filter = "PNG (*.png)|*.png";
+            if (saveFileDialogGraph.ShowDialog() == DialogResult.OK)
+            {
+                chartSQL.SaveImage(saveFileDialogGraph.FileName, ChartImageFormat.Png);
+            }
+        }
+
         private void saveImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            chartSQL.SaveImage("chart.png", ChartImageFormat.Png);
+            
         }
 
         private void comboBoxXvalues_SelectionChangeCommitted(object sender, EventArgs e)
